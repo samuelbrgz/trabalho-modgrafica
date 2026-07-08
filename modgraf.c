@@ -425,7 +425,9 @@ void drawObject() {
     glPushMatrix();
         glTranslatef(8.0 * cos(cubeAngle * 0.02), 5.0 + 1.5 * sin(cubeAngle * 0.05), 8.0 * sin(cubeAngle * 0.02));
         glRotatef(-90.0, 1.0, 0.0, 0.0);
-        glRotatef(angle * 5.0, 0.0, 0.0, 1.0); 
+        glRotatef(angle * 5.0, 0.0, 0.0, 1.0);
+        float pulso = 1.0 + 0.3 * sin(cubeAngle * 0.1); 
+        glScalef(pulso, pulso, pulso); 
 
         //Corpo
         glPushMatrix();
