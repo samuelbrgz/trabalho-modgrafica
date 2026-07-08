@@ -7,14 +7,14 @@
 
 // Animação
 float angle = 0.0;
-float sunAngle = 0.0;   // Ângulo para o Sol girar em si mesmo
-float cubeAngle = 0.0;  // Ângulo para o nosso objeto novo
+float sunAngle = 0.0;
+float cubeAngle = 0.0;
 
 // Sol
 float sunX = 0.0, sunY = 1.0, sunZ = 0.0;
 
-int animationEnabled = 1; // ligar/desligar a animação
-int collisionDetected = 0; // atualizar isso quando implementar colisão
+int animationEnabled = 1;
+int collisionDetected = 0;
 
 // Janela / Projeção
 int projectionMode = 0; // 0 = perspectiva, 1 = ortográfica
@@ -39,7 +39,7 @@ int firstMouse = 1;
 float sensitivity = 0.3;
 // Variáveis para prender o mouse
 int centerX, centerY;
-int ignoreNextMouse = 0; // Trava para evitar o loop infinito
+int ignoreNextMouse = 0;
 int paused = 0;
 
 // Iluminação
@@ -171,9 +171,12 @@ void updateCameraDirection() {
 void setupCamera() {
     if (projectionMode == 1) {
         // Ortográfica: vista diagonal fixa (isométrica)
-        gluLookAt(20.0, 15.0, 20.0,
-                  0.0, 0.0, 0.0,
-                  0.0, 1.0, 0.0);
+        // gluLookAt(20.0, 15.0, 20.0,
+        //           0.0, 0.0, 0.0,
+        //           0.0, 1.0, 0.0);
+        gluLookAt(camX, camY, camZ,
+        camX + dirX, camY + dirY, camZ + dirZ,
+        0.0, 1.0, 0.0);
     } else {
         // Perspectiva: câmera FPS livre
         gluLookAt(camX, camY, camZ,
