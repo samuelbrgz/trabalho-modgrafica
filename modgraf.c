@@ -421,19 +421,13 @@ void drawObject() {
 
     glPopMatrix();
 
-    // ===================== FOGUETE (3º Objeto Composto) =====================
+    // FOGUETE
     glPushMatrix();
-        // 1. Órbita e Animação: Flutuando e "quicando" suavemente ao redor do Sol
-        // Usamos sin() no eixo Y para ele subir e descer enquanto orbita
         glTranslatef(8.0 * cos(cubeAngle * 0.02), 5.0 + 1.5 * sin(cubeAngle * 0.05), 8.0 * sin(cubeAngle * 0.02));
-
-        // 2. Aponta o foguete para o céu (O cilindro/cone nascem no eixo Z)
         glRotatef(-90.0, 1.0, 0.0, 0.0);
-        
-        // 3. Faz o foguete girar no próprio eixo (efeito de estabilização)
         glRotatef(angle * 5.0, 0.0, 0.0, 1.0); 
 
-        // ----------------- CORPO (Cilindro Branco) -----------------
+        //Corpo
         glPushMatrix();
             GLfloat rocketAmb[]  = { 0.7, 0.7, 0.7, 1.0 };
             GLfloat rocketDif[]  = { 0.9, 0.9, 0.9, 1.0 };
@@ -446,13 +440,12 @@ void drawObject() {
             glutSolidCylinder(0.4, 1.5, 30, 30);
         glPopMatrix();
 
-        // ----------------- BICO (Cone Vermelho) -----------------
+        //Bico
         glPushMatrix();
             GLfloat tipAmb[] = { 0.4, 0.0, 0.0, 1.0 }; 
             GLfloat tipDif[] = { 0.9, 0.1, 0.1, 1.0 };
             glMaterialfv(GL_FRONT, GL_AMBIENT, tipAmb);
             glMaterialfv(GL_FRONT, GL_DIFFUSE, tipDif);
-            // Reutiliza o reflexo do corpo
             glMaterialfv(GL_FRONT, GL_SPECULAR, rocketSpec); 
             glMaterialf(GL_FRONT, GL_SHININESS, 50.0);
             
@@ -460,19 +453,66 @@ void drawObject() {
             glutSolidCone(0.4, 0.8, 30, 30);
         glPopMatrix();
 
-        // ----------------- MOTOR (Cone Escuro Invertido) -----------------
+        //Motor
         glPushMatrix();
             GLfloat engineAmb[] = { 0.1, 0.1, 0.1, 1.0 }; 
             GLfloat engineDif[] = { 0.2, 0.2, 0.2, 1.0 };
             glMaterialfv(GL_FRONT, GL_AMBIENT, engineAmb);
             glMaterialfv(GL_FRONT, GL_DIFFUSE, engineDif);
-            glMaterialf(GL_FRONT, GL_SHININESS, 10.0); // Fosco
+            glMaterialf(GL_FRONT, GL_SHININESS, 10.0);
             
             glRotatef(180.0, 1.0, 0.0, 0.0);
             glutSolidCone(0.25, 0.4, 30, 30);
         glPopMatrix();
 
-    glPopMatrix(); // Fim do Foguete
+    glPopMatrix();
+
+    //Mercúrio
+    glPushMatrix();
+        GLfloat mercAmb[]  = { 0.15, 0.15, 0.15, 1.0 }; // Sombra cinza escura
+        GLfloat mercDif[]  = { 0.40, 0.35, 0.35, 1.0 }; // Cor de rocha poeirenta
+        GLfloat mercSpec[] = { 0.10, 0.10, 0.10, 1.0 }; // Sem brilho (fosco)
+        glMaterialfv(GL_FRONT, GL_AMBIENT, mercAmb);
+        glMaterialfv(GL_FRONT, GL_DIFFUSE, mercDif);
+        glMaterialfv(GL_FRONT, GL_SPECULAR, mercSpec);
+        glMaterialf(GL_FRONT, GL_SHININESS, 5.0);
+
+        glTranslatef(3.0 * cos(45.0 * 3.14159/180.0), 1.0, 3.0 * sin(45.0 * 3.14159/180.0));
+        
+        glutSolidSphere(0.4, 30, 30);
+    glPopMatrix();
+
+
+    //Vênus
+    glPushMatrix();
+        GLfloat venAmb[]  = { 0.30, 0.20, 0.10, 1.0 }; // Sombra quente
+        GLfloat venDif[]  = { 0.85, 0.70, 0.40, 1.0 }; // Cor de atmosfera densa/sulfúrica
+        GLfloat venSpec[] = { 0.20, 0.20, 0.20, 1.0 }; // Brilho suave
+        glMaterialfv(GL_FRONT, GL_AMBIENT, venAmb);
+        glMaterialfv(GL_FRONT, GL_DIFFUSE, venDif);
+        glMaterialfv(GL_FRONT, GL_SPECULAR, venSpec);
+        glMaterialf(GL_FRONT, GL_SHININESS, 10.0);
+
+        glTranslatef(7.0 * cos(200.0 * 3.14159/180.0), 1.0, 7.0 * sin(200.0 * 3.14159/180.0));
+        
+        glutSolidSphere(0.9, 30, 30);
+    glPopMatrix();
+
+
+    //Júpiter
+    glPushMatrix();
+        GLfloat jupAmb[]  = { 0.20, 0.15, 0.10, 1.0 }; // Sombra avermelhada/marrom
+        GLfloat jupDif[]  = { 0.70, 0.50, 0.30, 1.0 }; // Cor predominante das faixas de gás
+        GLfloat jupSpec[] = { 0.10, 0.10, 0.10, 1.0 }; // Atmosfera opaca
+        glMaterialfv(GL_FRONT, GL_AMBIENT, jupAmb);
+        glMaterialfv(GL_FRONT, GL_DIFFUSE, jupDif);
+        glMaterialfv(GL_FRONT, GL_SPECULAR, jupSpec);
+        glMaterialf(GL_FRONT, GL_SHININESS, 5.0);
+
+        glTranslatef(22.0 * cos(310.0 * 3.14159/180.0), 2.0, 22.0 * sin(310.0 * 3.14159/180.0));
+        
+        glutSolidSphere(3.0, 40, 40); 
+    glPopMatrix();
 
 }
 
